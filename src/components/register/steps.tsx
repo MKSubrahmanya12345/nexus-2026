@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { ABSTRACT_INSTRUCTIONS, EVENT } from '@/content/nexus';
 import {
   DECLARATION_TEXT,
@@ -485,7 +486,7 @@ export function PaymentStep({ state, errors, update, screenshot, setScreenshot }
         <strong>₹{fee}</strong>
       </div>
       <div className="payment-upi">
-        <img src="/payment-qr.jpeg" alt="UPI QR code for NEXUS 2026 payments" />
+        <Image src="/payment-qr.jpeg" alt="UPI QR code for NEXUS 2026 payments" width={927} height={1009} unoptimized />
         <p>Scan the QR to pay.</p>
       </div>
       <ChoiceGroup

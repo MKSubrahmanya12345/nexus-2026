@@ -22,8 +22,8 @@ export function AdminDashboard() {
   const load = useCallback(async () => {
     setLoadError('');
     try {
-      const [me, o, r, p] = await Promise.all([
-        api<{ user: AdminUser }>('auth/me'),
+      const me = await api<{ user: AdminUser }>('auth/me');
+      const [o, r, p] = await Promise.all([
         api<Overview>('overview'),
         api<Registration[]>('registrations'),
         api<ExpoProject[]>('expo'),
@@ -35,7 +35,10 @@ export function AdminDashboard() {
       setStatus('ready');
     } catch (e) {
       if ((e as { status?: number }).status === 401) setStatus('signed-out');
-      else setLoadError(e instanceof Error ? e.message : 'Could not load the dashboard.');
+      else {
+        setLoadError(e instanceof Error ? e.message : 'Could not load the dashboard.');
+        setStatus('checking');
+      }
     }
   }, []);
 

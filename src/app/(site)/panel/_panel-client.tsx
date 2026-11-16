@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import { NextPage, PageIntro } from '@/components/site/PageParts';
 import { PANEL } from '@/content/nexus';
+import VerticalSpeakerStack from '@/components/panel/VerticalSpeakerStack';
 
 function HighlightPanel({ index, item }: { index: number; item: { title: string; text: string } }) {
   return (
@@ -68,48 +68,7 @@ export default function PanelClient({ slot }: PanelClientProps) {
           </div>
         </div>
 
-        {/* ── Panelists ────────────────────────────────────────────── */}
-        <div className="panelists-section">
-          <h2 className="list-title">Panelists</h2>
-          {PANEL.panelists.length ? (
-            <ul className="panelist-grid">
-              {PANEL.panelists.map((p) => (
-                <li key={p.name}>
-                  <article className="panelist-card">
-                    {p.photo && (
-                      <div className="panelist-photo">
-                        <Image
-                          src={p.photo}
-                          alt={`${p.name} — ${p.designation}, ${p.organisation}`}
-                          fill
-                          sizes="(max-width: 700px) 50vw, 260px"
-                          className="panelist-img"
-                        />
-                        {p.moderator && <span className="panelist-mod">Moderator</span>}
-                      </div>
-                    )}
-                    <div className="panelist-info">
-                      <strong>{p.name}</strong>
-                      <span>{p.designation}</span>
-                      <span>{p.organisation}</span>
-                    </div>
-                    {p.bio && p.bio.length > 0 && (
-                      <ul className="panelist-bio">
-                        {p.bio.map((b, i) => (
-                          <li key={i}>{b}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </article>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div className="panelists-empty">
-              <p>Panelists and the moderator will be announced soon.</p>
-            </div>
-          )}
-        </div>
+        <VerticalSpeakerStack panelists={PANEL.panelists} />
 
         <NextPage current="/panel" />
       </div>

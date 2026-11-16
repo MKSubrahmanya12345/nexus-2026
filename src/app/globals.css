@@ -2910,8 +2910,17 @@ html:not(.deck-ready) .deck-hint {
   list-style: none;
   padding: 0;
   display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(240px, 70vw, 320px);
   gap: clamp(16px, 3vw, 28px);
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+.panelist-grid li {
+  scroll-snap-align: start;
 }
 .panelist-card {
   display: grid;
@@ -2971,6 +2980,112 @@ html:not(.deck-ready) .deck-hint {
 }
 .panelist-bio li {
   margin: 4px 0;
+}
+
+/* Gallery — horizontal scroll-snap highlight strip (mirrors expo track gallery) */
+.gallery-section {
+  padding: clamp(48px, 8vw, 96px) clamp(20px, 5vw, 64px);
+  border-top: 1px solid var(--line);
+}
+.gallery-inner { max-width: 1100px; margin: 0 auto; }
+.gallery-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px; }
+.gallery-title { font-family: var(--font-display), sans-serif; font-size: clamp(28px, 4vw, 44px); color: var(--heading); margin: 8px 0 4px; }
+.gallery-title em { color: var(--accent); font-style: italic; }
+.gallery-sub { color: var(--muted); font-size: 14px; margin: 0; }
+.gallery-controls { display: flex; align-items: center; gap: 10px; color: var(--muted); font: 11px var(--font-mono), monospace; letter-spacing: .08em; }
+.gallery-controls button { background: transparent; color: var(--heading); border: 1px solid var(--line); width: 34px; height: 34px; cursor: pointer; font-size: 16px; }
+.gallery-controls button:disabled { opacity: .35; cursor: not-allowed; }
+.gallery-list { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(240px, 70vw, 360px); gap: 16px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--accent) transparent; list-style: none; margin: 0; padding: 0 0 14px; }
+.gallery-card { scroll-snap-align: start; background: #111511; border: 1px solid var(--line-strong); padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+.gallery-card-art { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--surface-solid); }
+.gallery-img { object-fit: cover; }
+.gallery-card-caption { margin: 0; color: var(--muted); font: 11px var(--font-mono), monospace; letter-spacing: .08em; }
+.gallery-hint { margin: 12px 0 0; color: var(--dim); font: 10px var(--font-mono), monospace; letter-spacing: .1em; }
+.gallery-hint span { color: var(--accent); }
+
+/* ── Industry Panel vertical speaker stack ────────────────────────────── */
+.vss-section {
+  padding: clamp(32px, 4vw, 56px) 0;
+  border-top: 1px solid var(--line);
+}
+.vss-inner { max-width: 1160px; margin: 0 auto; }
+.vss-header .eyebrow { margin-bottom: 8px; }
+.vss-title {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  color: var(--heading);
+  margin: 0 0 24px;
+}
+.vss-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 5vw, 56px);
+}
+.vss-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 360px) 1fr;
+  gap: clamp(20px, 3vw, 40px);
+  align-items: stretch;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.vss-card.is-visible { opacity: 1; transform: translateY(0); }
+.vss-poster {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--surface-solid);
+}
+.vss-poster-img { object-fit: cover; }
+.vss-slide-number {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(44px, 7vw, 80px);
+  line-height: 1;
+  color: rgba(140, 234, 90, 0.85);
+  text-shadow: 0 0 24px rgba(140, 234, 90, 0.35);
+  pointer-events: none;
+}
+.vss-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+.vss-index {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+.vss-name {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(24px, 3.2vw, 36px);
+  color: var(--heading);
+  margin: 0;
+  line-height: 1.1;
+}
+.vss-designation { color: var(--muted); font-size: 15px; margin: 0; }
+.vss-org {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.vss-bullets { margin: 0; padding-left: 18px; color: var(--text); font-size: 14.5px; line-height: 1.6; }
+.vss-bullets li { margin: 6px 0; }
+@media (max-width: 900px) {
+  .vss-card { grid-template-columns: 1fr; }
+  .vss-poster { max-width: 360px; margin: 0 auto; }
 }
 
 /* Panelists empty — compact, dashed border animated to signal "coming soon" */

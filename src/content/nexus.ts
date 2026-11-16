@@ -114,7 +114,7 @@ export const PANEL = {
       name: 'Aditya R. Poonja',
       designation: 'Business Development Executive',
       organisation: 'AIC NITTE',
-      photo: '/adithya.jpeg',
+      photo: '/gallery-1.jpeg',
       bio: [
         '6+ years of experience in AI, Robotics, Computer Vision and Embedded Systems.',
         'Worked with Bosch and Fraunhofer IOSB, contributing to technology projects involving Audi and Mercedes.',
@@ -125,7 +125,7 @@ export const PANEL = {
       name: 'Dr. Shashank Shetty',
       designation: 'Associate Professor, Department of CSE',
       organisation: 'NMAMIT',
-      photo: '/shashank.jpeg',
+      photo: '/gallery-2.jpeg',
       bio: [
         'Mentored 48+ student-led startups, facilitating over ₹50 lakh in funding.',
         'Co-founded Inspirante Technologies, delivering 25+ software solutions; Founder of Finite Loop, NMAMIT’s flagship coding club, now a community of 600+ students.',
@@ -136,7 +136,7 @@ export const PANEL = {
       name: 'Sujith Kumar',
       designation: 'Solutions Architect',
       organisation: 'Niveus Solutions',
-      photo: '/sujith.jpeg',
+      photo: '/gallery-3.jpeg',
       bio: [
         '14+ years of IT industry experience, specialising in innovative solutions within the FinTech domain.',
         'Expertise in cloud architecture, leveraging GCP, AWS and Azure to design and implement scalable solutions.',

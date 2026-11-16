@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { NextPage, PageIntro } from '@/components/site/PageParts';
 import { PANEL } from '@/content/nexus';
 
@@ -75,11 +76,30 @@ export default function PanelClient({ slot }: PanelClientProps) {
               {PANEL.panelists.map((p) => (
                 <li key={p.name}>
                   <article className="panelist-card">
+                    {p.photo && (
+                      <div className="panelist-photo">
+                        <Image
+                          src={p.photo}
+                          alt={`${p.name} — ${p.designation}, ${p.organisation}`}
+                          fill
+                          sizes="(max-width: 700px) 50vw, 260px"
+                          className="panelist-img"
+                        />
+                        {p.moderator && <span className="panelist-mod">Moderator</span>}
+                      </div>
+                    )}
                     <div className="panelist-info">
                       <strong>{p.name}</strong>
                       <span>{p.designation}</span>
                       <span>{p.organisation}</span>
                     </div>
+                    {p.bio && p.bio.length > 0 && (
+                      <ul className="panelist-bio">
+                        {p.bio.map((b, i) => (
+                          <li key={i}>{b}</li>
+                        ))}
+                      </ul>
+                    )}
                   </article>
                 </li>
               ))}

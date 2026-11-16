@@ -2954,10 +2954,23 @@ html:not(.deck-ready) .deck-hint {
   margin: 0;
 }
 .panelist-info span {
+  display: block;
   color: var(--muted);
   font-size: 14px;
   margin: 2px 0 0;
   line-height: 1.5;
+}
+.panelist-bio {
+  list-style: disc;
+  padding-left: 18px;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: left;
+}
+.panelist-bio li {
+  margin: 4px 0;
 }
 
 /* Panelists empty — compact, dashed border animated to signal "coming soon" */
